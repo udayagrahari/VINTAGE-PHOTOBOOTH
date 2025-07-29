@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vintage PhotoBooth</title>
+  <link rel="stylesheet" href="photo.css" />
+</head>
+<body>
+  <h1 id="heading">Vintage PhotoBooth</h1>
+  <p id="p">Take your photo</p>
+  <div id="btn">
+    <button id="btn1">Use Camera</button>
+    <button id="btn2">Upload Photos</button>
+  </div>
+
+  <!-- Camera Section -->
+  <div id="camera-container" class="hidden">
+    <video id="video" autoplay playsinline></video>
+    <div id="countdown" class="hidden"></div>
+    <button id="capture-btn">Capture Photo</button>
+  </div>
+
+  <!-- Generate Strip Button -->
+  <button id="generate-strip-btn" class="hidden">Generate Strip</button>
+
+  <script src="photobooth.js"></script>
+</body>
+</html>
+
+

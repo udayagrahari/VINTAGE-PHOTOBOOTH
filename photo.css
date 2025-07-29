@@ -1,0 +1,116 @@
+/* General Styles */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #F5E7DA;
+  font-style: italic;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+#heading {
+  color: #5E3B1F;
+  font-size: 65px;
+  margin-bottom: 10px;
+}
+
+#p {
+  color: #5E3B1F;
+  font-size: larger;
+  margin-bottom: 20px;
+}
+
+#btn1, #btn2 {
+  background-color: #5E3B1F;
+  color: #F5E7DA;
+  font-family: Arial, Helvetica, sans-serif;
+  height: 40px;
+  width: 150px;
+  border-radius: 10px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+#btn1:hover, #btn2:hover {
+  background-color: #3E2613;
+  transform: scale(1.05);
+}
+
+.hidden {
+  display: none;
+}
+
+#camera-container {
+  margin-top: 10px;
+  position: relative;
+}
+
+video {
+  width: 500px;
+  height: 400px;
+  border: 3px solid #5E3B1F;
+  filter: grayscale(100%);
+  margin-left: 120px;
+}
+
+#capture-btn {
+  margin-top: 5px;
+  padding: 12px;
+  background-color: #5E3B1F;
+  color: #F5E7DA;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#generate-strip-btn {
+  margin-top: 15px;
+  padding: 14px;
+  width: 180px;
+  font-size: 18px;
+  background-color: #5E3B1F;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#generate-strip-btn:hover {
+  background-color: #3E2613;
+}
+
+#countdown {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 70px;
+  font-weight: bold;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 10px 20px;
+  border-radius: 10px;
+  z-index: 10;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

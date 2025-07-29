@@ -1,0 +1,29 @@
+body {
+    background-color: #F5E7DA;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+canvas {
+    margin-top: 20px;
+    background-color: black;
+}
+
+#strip-options {
+    margin-top: 20px;
+    
+}
+
+#download-strip {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #5E3B1F;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+
+
+
+

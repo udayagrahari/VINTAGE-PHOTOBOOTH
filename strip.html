@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Generated Photo Strip</title>
+  <link rel="stylesheet" href="strip.css">
+  <style>
+    body {
+      background-color: #F5E7DA;
+      text-align: center;
+      font-family: sans-serif;
+    }
+
+    canvas {
+      margin-top: 20px;
+      background-color: black;
+    }
+
+    #strip-options {
+      margin-top: 20px;
+    }
+
+    #download-strip {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #5E3B1F;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    #color-palette {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      max-width: 600px;
+      margin: 20px auto;
+    }
+
+    .color-option {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .color-swatch {
+      width: 20px;
+      height: 20px;
+      border: 1px solid #aaa;
+      border-radius: 50%;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <h1>Your Vintage Strip</h1>
+  <div id="strip-options">
+    <label for="border-width">Border Width:</label>
+    <input type="range" id="border-width" min="5" max="50" value="20">
+  </div>
+
+  <div id="color-palette" aria-label="Border Color Options" role="radiogroup">
+    <label class="color-option">
+      <input type="radio" name="border-color" value="#F9C5D1" checked />
+      <span class="color-swatch" style="background-color: #F9C5D1;"></span>Blush
+    </label>
+    <label class="color-option">
+      <input type="radio" name="border-color" value="#FFDAB9" />
+      <span class="color-swatch" style="background-color: #FFDAB9;"></span>Peach Puff
+    </label>
+    <label class="color-option">
+      <input type="radio" name="border-color" value="#E6C7C2" />
+      <span class="color-swatch" style="background-color: #E6C7C2;"></span>Rose Dust
+    </label>
+    <label class="color-option">
+      <input type="radio" name="border-color" value="#FFF5EE" />
+      <span class="color-swatch" style="background-color: #FFF5EE;"></span>Seashell
+    </label>
+    <label class="color-option">
+      <input type="radio" name="border-color" value="#F8C8DC" />
+      <span class="color-swatch" style="background-color: #F8C8DC;"></span>Shell Pink
+    </label>
+    <label class="color-option">
+      <input type="radio" name="border-color" value="#FAF0E6" />
+      <span class="color-swatch" style="background-color: #FAF0E6;"></span>Linen
+    </label>
+    <label class="color-option">
+      <input type="radio" name="border-color" value="#EDC9AF" />
+      <span class="color-swatch" style="background-color: #EDC9AF;"></span>Desert Sand
+    </label>
+    <label class="color-option">
+      <input type="radio" name="border-color" value="#FAD6BF" />
+      <span class="color-swatch" style="background-color: #FAD6BF;"></span>Pale Nude
+    </label>
+    <label class="color-option">
+      <input type="radio" name="border-color" value="#DCAE96" />
+      <span class="color-swatch" style="background-color: #DCAE96;"></span>Dusty Rose
+    </label>
+    <label class="color-option">
+      <input type="radio" name="border-color" value="#EFBBCC" />
+      <span class="color-swatch" style="background-color: #EFBBCC;"></span>Cameo Pink
+    </label>
+    <label class="color-option">
+      <input type="radio" name="border-color" value="#F7D1D1" />
+      <span class="color-swatch" style="background-color: #F7D1D1;"></span>Powder Blush
+    </label>
+    <label class="color-option">
+      <input type="radio" name="border-color" value="#FAD4C0" />
+      <span class="color-swatch" style="background-color: #FAD4C0;"></span>Apricot Nude
+    </label>
+    <label class="color-option">
+      <input type="radio" name="border-color" value="#F3E5AB" />
+      <span class="color-swatch" style="background-color: #F3E5AB;"></span>Vanilla Cream
+    </label>
+    <label class="color-option">
+      <input type="radio" name="border-color" value="#D2B1A3" />
+      <span class="color-swatch" style="background-color: #D2B1A3;"></span>Toasted Almond
+    </label>
+  </div>
+
+  <canvas id="strip-canvas"></canvas>
+  <button id="download-strip">Download Strip</button>
+
+  <script>
+    const canvas = document.getElementById("strip-canvas");
+    const ctx = canvas.getContext("2d");
+    let borderWidth = 20;
+    let borderColor = '#F9C5D1';
+    const borderSlider = document.getElementById("border-width");
+
+    const photos = JSON.parse(localStorage.getItem("capturedPhotos") || "[]");
+    const imgWidth = 200;
+    const imgHeight = 150;
+    const spacing = 5;
+
+    function drawStrip() {
+      canvas.width = imgWidth + borderWidth * 2;
+      canvas.height = imgHeight * photos.length + spacing * (photos.length - 1) + borderWidth * 2;
+
+      ctx.fillStyle = borderColor;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      photos.forEach((photo, index) => {
+        const img = new Image();
+        img.src = photo;
+        img.onload = () => {
+          ctx.drawImage(img, borderWidth, borderWidth + index * (imgHeight + spacing), imgWidth, imgHeight);
+        };
+      });
+    }
+
+    borderSlider.addEventListener("input", () => {
+      borderWidth = parseInt(borderSlider.value);
+      drawStrip();
+    });
+
+    document.getElementsByName("border-color").forEach(radio => {
+      radio.addEventListener("change", (e) => {
+        borderColor = e.target.value;
+        drawStrip();
+      });
+    });
+
+    document.getElementById("download-strip").addEventListener("click", () => {
+      const link = document.createElement("a");
+      link.href = canvas.toDataURL("image/png");
+      link.download = "photo-strip.png";
+      link.click();
+    });
+
+    drawStrip();
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
